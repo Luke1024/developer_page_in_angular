@@ -75,6 +75,7 @@ export class MessageServiceService {
                 console.log("Setting token " + response.body.message)
                 this.token = response.body.message
                 localStorage.setItem(this.storageKey, this.token)
+                this.sendMessage()
             }
           }
         }

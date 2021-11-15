@@ -1,58 +1,13 @@
-<div style="margin:auto; min-width: 800px; max-width: 1280px;">
-    <div class="row">
-        <div class="col">
-            <div class="card m-3 shadow" >
-                <img src="assets/images/img1.png" class="card-img-top">
-                <div class="card-body">
-                    <p class="card-title">TodoApp</p>
-                    <p class="card-text">This is the simplest application that I was able to use to learn proper full-stack development. When I started this app I knew nothing about front-end development so started from vanilla js. I quickly learned that programming client with vanilla js is quite pointless and moved to jquery. Jquery code quickly became quite chaotic. I was aware then that better frameworks structure code better so I moved to Angular with typescript as the ultimate solution. This was an interesting course in the history of evolution in front-end development for me.</p>
-                    <div class="mb-3">
-                        <a class="btn btn-outline-primary" (click)="send('1')" href="https://morning-coast-72770.herokuapp.com/" target="_blank">Open app on Heroku</a>
-                    </div>
-                    <div class="mb-3">
-                        <a class="btn btn-outline-primary" (click)="send('2')" href="https://github.com/Luke1024/ToDo_fullStackApp">Go to project github repository</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card m-3 shadow" >
-                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    </div>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active" data-bs-interval="10000">
-                        <img src="assets/images/img3.bmp" class="d-block w-100" alt="...">
-                      </div>
-                      <div class="carousel-item" data-bs-interval="2000">
-                        <img src="assets/images/img2.bmp" class="d-block w-100" alt="...">
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-                <div class="card-body">
-                    <p class="card-title">TradingApp</p>
-                    <p class="card-text">This app is my earlier project (<a href="https://github.com/Luke1024/financial-analytics">https://github.com/Luke1024/financial-analytics</a>) extremely simplified to actually make it possible to finish it in a reasonable time (or finish at all) and show it as a portfolio project. The idea for this app came to me naturally because I was engaged in trading earlier in my career.
-                    This app can simulate trading on the forex market on EUR/USD currency pair. App using external API to update EUR/USD exchange rate in real-time every 5 minutes (limits of free API) and using this data to compute profits and balance of accounts created by a user.</p>
-                    <div class="mb-3">
-                        <a class="btn btn-outline-primary" href="https://protected-stream-68029.herokuapp.com/">Open app on Heroku</a>
-                    </div>
-                    <div class="mb-3">
-                        <a class="btn btn-outline-primary" href="https://github.com/Luke1024/ToDo_fullStackApp">Go to project github repository</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="card m-3 text-white bg-dark shadow">
+  <img src={{card.img}} class="card-img-top">
+    <div class="card-body">
+      <p class="card-title">{{card.title}}</p>
+      <p class="card-text">{{card.text}}</p>
+      <div class="mb-3">
+          <a class="btn btn-outline-primary" href="{{card.app}}" target="_blank" (click)="send('app')">Open app on Heroku</a>
+      </div>
+      <div class="mb-3">
+          <a class="btn btn-outline-primary" href="{{card.repo}}" target="_blank" (click)="send('repo')">Go to project github repository</a>
+      </div>
     </div>
 </div>
-<p style="text-align: center;">Contact: <a href="mailto: chajdas.lukasz@gmail.com">chajdas.lukasz@gmail.com</a></p>
-

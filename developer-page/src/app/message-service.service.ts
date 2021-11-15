@@ -11,11 +11,13 @@ import { StringDto } from './models/string-dto';
 })
 export class MessageServiceService {
 
+  private pingingIntervalInSeconds = 30;
+
   private storageKey = "local_token"
 
   private token = ""
 
-  private rootUrl = "http://localhost:8080/input"
+  private rootUrl = "https://murmuring-caverns-97353.herokuapp.com/input"
   private tokenUrl = this.rootUrl + "/token"
   private pulseUrl = this.rootUrl + "/load"
 
@@ -24,6 +26,7 @@ export class MessageServiceService {
   constructor(private http:HttpClient) { }
 
   public getToken() {
+    this.runTimer()
     var token = localStorage.getItem(this.storageKey);
     if(token == null){
         this.http.get<StringDto>(this.tokenUrl, {observe:'response'})
@@ -36,7 +39,17 @@ export class MessageServiceService {
     }
   }
 
+  private runTimer(){
+    setInterval(() => {
+      this.pingingIntervalInSeconds--;
+      if(this.pingingIntervalInSeconds==0){
+        this.send("ping")
+      }
+    },1000)
+  }
+
   public send(code:string){
+    this.pingingIntervalInSeconds = 30;
     this.operationsStorage.push(code)
     this.sendMessage()
   }

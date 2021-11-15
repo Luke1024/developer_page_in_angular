@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageServiceService } from './message-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'developer-page';
+
+  constructor(private messageService:MessageServiceService) {
+
+  }
+
+  ngOnInit(): void {
+    this.messageService.getToken()
+  }
+
+  send(code:string){
+    this.messageService.send(code)
+  }
 }

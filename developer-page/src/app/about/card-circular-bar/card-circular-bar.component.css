@@ -1,0 +1,64 @@
+#card {
+    position: relative;
+    width: 120px;
+    height: 180px;
+    animation:cardanime;
+    animation-delay: var(--card_anime_delay);
+    animation-duration: var(--card_anime_duration);
+    animation-fill-mode:both;
+    border-radius: 20px;
+    box-shadow:  inset 3px 3px 3px rgb(0, 0, 0), inset -2px -2px 2px rgba(255, 255, 255, 0.61),
+    0px 0px 0px rgba(255,255,255,0.5), 0px 0px 0px black;
+    background-color: var(--card_color);
+    z-index: 1;
+    transition:0.2s;
+    transform: scale(1.2);
+    margin:24px 20px;
+}
+
+#card:hover {
+    box-shadow:inset 0px 0px 3px rgb(0, 0, 0), inset 0px 0px 2px rgba(255, 255, 255, 0.61),
+     -4px -4px 4px rgba(255,255,255,0.5), 6px 6px 6px black;
+}
+
+@keyframes cardanime {
+    from {
+        opacity: 0;
+        filter:blur(50px);
+    }
+    to {
+        opacity: 1;
+        filter:blur(0px);
+    }
+}
+
+#circular_bar {
+    position: absolute;
+    top:35%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
+#description {
+    text-shadow: 2px 2px 2px black,
+     -1px 0 rgb(102, 101, 101), 0 1px black, 1px 0 black, 0 -1px rgb(102, 102, 102)
+    ;
+    position: absolute;
+    top:80%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    color: var(--textcolor);
+    font-size: 1.5rem;
+    animation: descriptionanimation;
+    animation-delay:var(--description_blur_anime_delay);
+    animation-duration: var(--description_blur_anime_duration);
+    animation-fill-mode: both;
+    z-index: 4;
+}
+
+@keyframes descriptionanimation {
+    from { filter:blur(50px); }
+    to { filter:blur(0px); }
+}
+

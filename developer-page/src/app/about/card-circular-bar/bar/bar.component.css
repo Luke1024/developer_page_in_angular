@@ -1,0 +1,119 @@
+
+#bar {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    opacity: var(--opacity);
+    animation: barfadein;
+    animation-delay: var(--fadeindelay);
+    animation-duration: var(--fadeinduration);
+    animation-fill-mode: both;
+}
+
+@keyframes barfadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#background {
+    width: 100px;
+    height: 100px;
+    position:absolute;
+    background-color: var(--blockercolor);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    z-index: 0;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 5px 3px 3px black, -3px -3px 3px 3px rgba(255, 255, 255, 0.3);
+    
+}
+
+#left_blocker {
+    position: absolute;
+    z-index:var(--blockerzindex);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--blockercolor);
+    clip-path: inset(0px 50px 0px 0px);
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#right_blocker {
+    position: absolute;
+    z-index:1;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--blockercolor);
+    clip-path: inset(0px 0px 0px 50px);
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#left {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%) rotate(var(--leftrotation));
+    z-index:4;
+    width: 96px;
+    height: 96px;
+    background-color: var(--barcolor);
+    border-radius: 50%;
+    clip-path: inset(0px 48px 0px 0px);
+    border:1px solid rgba(0, 0, 0, 0.6);
+}
+
+#right {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%) rotate(var(--rightrotation));
+    z-index: 3;
+    width: 96px;
+    height: 96px;
+    background-color: var(--barcolor);
+    border-radius: 50%;
+    clip-path: inset(0px 48px 0px 0px);
+    border:1px solid rgba(0, 0, 0, 0.6);
+}
+
+#center {
+    position:absolute;
+    z-index:6;
+    width: 70px;
+    height: 70px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background-color: var(--centercolor);
+    border-radius: 50%;
+    border:1px solid rgba(119, 127, 155, 0.486);
+    box-shadow: inset 3px 3px 3px 1px rgb(0, 0, 0),
+    -1px -1px 1px 1px rgba(0,0,0,0.4),
+    1px 1px 1px 1px rgba(255,255,255,0.3);
+}
+
+#text {
+    position: absolute;
+    z-index: 7;
+    top:53%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size:22px;
+    font-weight: bold;
+    color:var(--textcolor);
+    text-shadow: 1px 1px 1px black, -1px 0 rgba(255,255,255,0.2), 0 1px rgba(255,255,255,0.2), 1px 0 rgba(255,255,255,0.2), 0 -1px rgba(255,255,255,0.2);
+    font-family: bazzaronite;
+}
+
+@font-face {
+    font-family:bazzaronite;
+    src: url(bazaronite.regular.ttf)
+}

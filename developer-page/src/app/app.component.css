@@ -1,44 +1,5 @@
-#bl1 {
-    background-color: rgb(44, 44, 44);
-    color:white;
-    height: 600px;
-}
 
-#bl2 {
-    background-color: rgb(44, 44, 44);
-    color:white;
-    height: 600px;
-}
 
-.myCard {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    height: 70rem;
-}
 
-.myButton {
-    width: 100%;
-}
 
-.myButtonGroup {
-    margin:auto;
-    width: 90%;
-    margin-bottom:2rem;
-}
 
-.myIconGroup {
-    bottom:5rem;
-    width: 500px;
-    margin:auto;
-    position:relative;
-}
-
-#ang {
-    
-}
-
-#spr {
-    top:6rem;
-    left:8rem;
-    position:absolute;
-}

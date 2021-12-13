@@ -12,12 +12,4 @@ export class AppComponent {
   constructor(private messageService:MessageServiceService) {
 
   }
-
-  ngOnInit(): void {
-    this.messageService.getToken()
-  }
-
-  send(code:string){
-    this.messageService.send(code)
-  }
 }

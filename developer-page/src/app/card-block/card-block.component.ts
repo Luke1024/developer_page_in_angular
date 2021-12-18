@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { MessageServiceService } from '../message-service.service';
 import { Card } from '../models/card';
 
@@ -19,5 +19,15 @@ export class CardBlockComponent implements OnInit {
   send(code:string){
     //this.messageService.send(code)
   }
+
+  loadModal(){
+    this.modal = "initial";
+  }
+
+  closeModal(){
+    this.modal = "none";
+  }
+
+  @HostBinding("style.--modal") modal = "none";
 
 }

@@ -1,61 +1,19 @@
-<div style="margin:auto; width: 80rem;">
-    <div style="text-align: center; color:white; margin-top: 2rem; text-decoration: underline;"><h2>Projects</h2></div>
-    <div class="row">
-        <div class="col">
-            <div class="card bg-dark shadow text-white myCard">
-                <img src="assets/images/img1.png" class="card-img-top">
-                <div class="card-body">
-                    <h4 class="card-title">TodoApp</h4>
-                    <p class="card-text" style="overflow: auto;">This is the simplest application that I was able to use to learn proper full-stack development. When I started this app I knew nothing about front-end development so started from vanilla js. I quickly learned that programming client with vanilla js is quite pointless and moved to jquery. Jquery code quickly became quite chaotic. I was aware then that newer frameworks structure code better so I moved to Angular with typescript as the ultimate solution. This was an interesting course in the history of evolution in front-end development for me.</p>
-                </div>
-                <div class="myIconGroup">
-                    <img src="assets/images/angular.png" style="width: 340px; height: 170px;" id="ang">
-                    <img src="assets/images/spring_boot.png" style="width: 350px; height: 150px;" id="spr">
-                </div>
-                <div class="myButtonGroup">
-                    <div class="mb-3">
-                        <a class="btn btn-outline-danger myButton" href="https://morning-coast-72770.herokuapp.com/" target="_blank" (click)="send('ToDo Hero')">Open app on Heroku</a>
-                    </div>
-                    <div class="mb-3">
-                        <a class="btn btn-outline-success myButton" href="https://github.com/Luke1024/ToDo_fullStackApp" target="_blank" (click)="send('ToDo Git')">Go to project github repository</a>
+<div id="block">
+    <div class="container" id="container">
+        <div class="row">
+            <div id="card" class="column">
+                <div id="mask" class="screen">
+                    <div id="description">
+                        <p id="title">ToDoApp</p>
+                        <p id="tech">Angular / Spring Boot</p>
+                        <a id="button" class="btn btn-outline-danger myButton" (click)="loadModal()">Learn more</a>
                     </div>
                 </div>
+                <img src="assets/images/img1.png" id="img" class="screen">
             </div>
         </div>
-        <div class="col">
-            <div class="card bg-dark shadow text-white myCard">
-                <div>
-                <ngb-carousel [interval]="5000" [showNavigationArrows]="false" [showNavigationIndicators]="false" [pauseOnHover]="false">
-                    <ng-template ngbSlide>
-                      <div class="picsum-img-wrapper">
-                        <img src="assets/images/img2.bmp" class="d-block w-100" alt="Random first slide">
-                      </div>
-                    </ng-template>
-                    <ng-template ngbSlide>
-                      <div class="picsum-img-wrapper">
-                        <img src="assets/images/img3.bmp" class="d-block w-100" alt="Random second slide">
-                      </div>
-                    </ng-template>
-                </ngb-carousel>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">TradingApp</h4>
-                    <p class="card-text" style="overflow: auto;">This app is my earlier project (<a href="https://github.com/Luke1024/financial-analytics">https://github.com/Luke1024/financial-analytics</a>) extremely simplified to actually make it possible to finish it in a reasonable time (or finish at all) and show it as a portfolio project. The idea for this app came to me naturally because I was engaged in trading earlier in my career.
-                    This app can simulate trading on the forex market on EUR/USD currency pair. App using external API to update EUR/USD exchange rate in real-time every 5 minutes (limits of free API) and using this data to compute profits and balance of accounts created by a user.</p>
-                </div>
-                <div class="myIconGroup">
-                    <img src="assets/images/angular.png" style="width: 340px; height: 170px;" id="ang">
-                    <img src="assets/images/spring_boot.png" style="width: 350px; height: 150px;" id="spr">
-                </div>
-                <div class="myButtonGroup">
-                    <div class="mb-3">
-                        <a class="btn btn-outline-danger myButton" href="https://protected-stream-68029.herokuapp.com/" target="_blank" (click)="send('Trade Hero')">Open app on Heroku</a>
-                    </div>
-                    <div class="mb-3">
-                        <a class="btn btn-outline-success myButton" href="https://github.com/Luke1024/TradingApp" target="_blank" (click)="send('Trade Git')">Go to project github repository</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+    <div id="modal">
+        <div id="x" (click)="closeModal()">&#10006;</div>
     </div>
 </div>

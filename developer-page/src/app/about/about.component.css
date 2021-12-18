@@ -1,0 +1,28 @@
+#block {
+    height: 500px;
+    width: 80rem;
+    margin:auto;
+    border-radius: 20px;
+    background-color: rgb(40,40,40);
+    box-shadow: inset -5px -5px 5px black,
+        inset 5px 5px 5px rgba(255, 255, 255, 0.3),
+        20px 20px 20px black;
+    position: relative;
+}
+
+#skills {
+    text-align: center;
+    margin:auto;
+    width: 80rem;
+    position: relative;
+    top:2rem; 
+    color:white;
+    text-decoration: underline;
+}
+
+#container {
+    min-width:80rem;
+    position:relative; 
+    top:8rem; 
+    left:5rem;
+}

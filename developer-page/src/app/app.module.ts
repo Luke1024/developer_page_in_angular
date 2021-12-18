@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CardBlockComponent } from './card-block/card-block.component';
 import { MainViewComponent } from './main-view/main-view.component';
@@ -16,7 +15,6 @@ import { CardCircularBarComponent } from './about/card-circular-bar/card-circula
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent,
     CardBlockComponent,
     MainViewComponent,
     IntroComponent,

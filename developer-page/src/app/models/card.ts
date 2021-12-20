@@ -1,7 +1,9 @@
 export interface Card {
     title:string;
-    text:string;
-    img:string;
-    app:string;
-    repo:string;
+    tech:string;
+    imgUrl:string;
+    img2Url:string;
+    description:string;
+    appUrl:string;
+    repoUrl:string;
 }

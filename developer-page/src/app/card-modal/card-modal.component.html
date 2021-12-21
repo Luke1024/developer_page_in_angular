@@ -1,0 +1,9 @@
+<div id="modal">
+    <img src="{{card.imgUrl}}" id="modal_img">
+    <img src="{{card.img2Url}}" id="modal_img2">
+    <h2 id="modal_title">{{card.title}}</h2>
+    <p id="modal_description">{{card.description}}</p>
+    <a id="modal_bt1" class="btn btn-outline-success myButton" href={{card.appUrl}} target="_blank" (click)="send(card.title + ' hero')">Open app on Heroku</a>
+    <a id="modal_bt2" class="btn btn-outline-danger myButton" href={{card.repoUrl}} target="_blank" (click)="send(card.title + ' git')">Open github repository</a>
+    <div id="x" (click)="closeModal()">&#10006;</div>
+</div>

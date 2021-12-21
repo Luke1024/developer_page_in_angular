@@ -2,26 +2,9 @@
     <div class="container" id="container">
         <div class="row">
             <div *ngFor="let card of cards">
-                <div class="column" id="card">
-                    <div id="mask" class="screen">
-                        <div id="description">
-                            <p id="title">{{card.title}}</p>
-                            <p id="tech">{{card.tech}}</p>
-                            <a id="button" class="btn btn-outline-danger myButton" (click)="loadModal(card)">Learn more</a>
-                        </div>
-                    </div>
-                    <img src="{{card.imgUrl}}" id="img" class="screen">
-                </div>
+                <app-card [card]="card" (cardEmit)="loadModal($event)"></app-card>
             </div>
         </div>
     </div>
-    <div id="modal">
-        <img src="{{imageUrl}}" id="modal_img">
-        <img src="{{image2Url}}" id="modal_img2">
-        <h2 id="modal_title">{{title}}</h2>
-        <p id="modal_description">{{description}}</p>
-        <a id="modal_bt1" class="btn btn-outline-success myButton" href={{appUrl}} target="_blank" (click)="send(title + ' hero')">Open app on Heroku</a>
-        <a id="modal_bt2" class="btn btn-outline-danger myButton" href={{repoUrl}} target="_blank" (click)="send(title + ' git')">Open github repository</a>
-        <div id="x" (click)="closeModal()">&#10006;</div>
-    </div>
+    <app-card-modal id="modal" [card]="cardModal" (close)="closeModal()"></app-card-modal>
 </div>

@@ -10,6 +10,7 @@ import { Card } from '../models/card';
 export class CardBlockComponent implements OnInit {
 
   cards:Card[] = []
+  cardModal:Card = {} as Card;
 
   //modal Urls
   imageUrl:string = "";
@@ -41,33 +42,14 @@ export class CardBlockComponent implements OnInit {
 
   loadModal(card:Card){
     this.modal = "initial";
-    this.loadUrls(card);
+    this.cardModal = card;
   }
 
   closeModal(){
     this.modal = "none";
-    this.cleanUrls();
   }
 
-  loadUrls(card:Card){
-    this.imageUrl = card.imgUrl;
-    this.image2Url = card.img2Url;
-    this.title = card.title;
-    this.description = card.description;
-    this.appUrl = card.appUrl;
-    this.repoUrl = card.repoUrl;
-  }
-
-  cleanUrls(){
-    this.imageUrl = "";
-    this.image2Url = "";
-    this.title = "";
-    this.description = "";
-    this.appUrl = "";
-    this.repoUrl = "";
-  }
-
-  @HostBinding("style.--modal") modal = "none";
+  @HostBinding("style.--modal_display") modal = "none";
 
 
 }

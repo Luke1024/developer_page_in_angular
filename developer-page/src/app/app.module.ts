@@ -11,6 +11,8 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { BarComponent } from './about/card-circular-bar/bar/bar.component';
 import { CardCircularBarComponent } from './about/card-circular-bar/card-circular-bar.component';
+import { CardComponent } from './card/card.component';
+import { CardModalComponent } from './card-modal/card-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CardCircularBarComponent } from './about/card-circular-bar/card-circula
     AboutComponent,
     ContactComponent,
     BarComponent,
-    CardCircularBarComponent
+    CardCircularBarComponent,
+    CardComponent,
+    CardModalComponent
   ],
   imports: [
     BrowserModule,

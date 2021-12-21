@@ -1,0 +1,10 @@
+<div class="column" id="card">
+    <div id="mask" class="screen">
+        <div id="description">
+            <p id="title">{{card.title}}</p>
+            <p id="tech">{{card.tech}}</p>
+            <a id="button" class="btn btn-outline-danger myButton" (click)="loadModal()">Learn more</a>
+        </div>
+    </div>
+    <img src="{{card.imgUrl}}" id="img" class="screen">
+</div>

@@ -1,4 +1,6 @@
+<div id="background">
 <div id="block">
+    <h2 id="projects">Projects:</h2>
     <div class="container" id="container">
         <div class="row">
             <div *ngFor="let card of cards">
@@ -6,5 +8,14 @@
             </div>
         </div>
     </div>
+    <h2 id="mprojects">Mini projects:</h2>
+    <div class="container" id="container2">
+        <div class="row">
+            <div *ngFor="let card of cards2">
+                <app-card [card]="card" (cardEmit)="loadModal($event)"></app-card>
+            </div>
+        </div>
+    </div>
     <app-card-modal id="modal" [card]="cardModal" (close)="closeModal()"></app-card-modal>
+</div>
 </div>

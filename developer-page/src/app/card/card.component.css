@@ -1,7 +1,7 @@
 #card {
-    margin:10px;
-    height:350px;
-    width:350px;
+    margin:5px;
+    height:370px;
+    width:370px;
     border-radius: 20px;
     background-color: rgb(40,40,40);
     box-shadow: inset -5px -5px 5px black,
@@ -20,8 +20,8 @@
     top:15px;
     left:15px;
     position: absolute;
-    width:320px;
-    height:320px;
+    width:340px;
+    height:340px;
     border-radius: 10px;
 }
 

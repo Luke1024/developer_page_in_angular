@@ -4,22 +4,23 @@
     height: 100%;
 }
 
+#navbar {
+    z-index: 2;
+    position:fixed;
+}
+
 #intro {
-    position: relative;
-    top:100px;
+    
 }
 
 #about {
-    position: relative;
-    top:150px;
+    
 }
 
-#card {
-    position: relative;
-    top:150px;
+#portfolio {
+    
 }
 
 #contact {
-    position: relative;
-    top:150px;
+
 }

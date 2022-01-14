@@ -13,6 +13,20 @@ import { BarComponent } from './about/card-circular-bar/bar/bar.component';
 import { CardCircularBarComponent } from './about/card-circular-bar/card-circular-bar.component';
 import { CardComponent } from './card/card.component';
 import { CardModalComponent } from './card-modal/card-modal.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: "",
+    component: MainViewComponent
+  }
+];
+const routerOptions: ExtraOptions = {
+  anchorScrolling: "enabled"
+  //scrollPositionRestoration: "enabled"
+};
 
 @NgModule({
   declarations: [
@@ -25,14 +39,22 @@ import { CardModalComponent } from './card-modal/card-modal.component';
     BarComponent,
     CardCircularBarComponent,
     CardComponent,
-    CardModalComponent
+    CardModalComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    RouterModule,
+    RouterModule.forRoot(routes, routerOptions)
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
+
+
 export class AppModule { }

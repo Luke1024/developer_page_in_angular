@@ -1,6 +1,6 @@
 #background {
-    height:700px;
-    background-color: rgb(70,70,70);
+    height:800px;
+    background-color: rgb(50,50,50);
     position: relative;
 }
 
@@ -8,6 +8,7 @@
     background-color: rgb(60,60,60);
     height: 600px;
     width: 1280px;
+    top:100px;
     position: relative;
     margin:auto;
     border-radius: 30px;

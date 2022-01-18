@@ -1,4 +1,24 @@
 <div id="bl3">
+    <div class="container">
+        <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="contact.name">
+                <div *ngIf="correctness.name"class="alert alert-danger">Name is required</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" [(ngModel)]="contact.email">
+                <div *ngIf="correctness.message"
+                    class="alert alert-danger">Email is required</div>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+            <input type="text" class="form-control" id="message" [(ngModel)]="contact.message">
+            </div>
+            <button class="btn btn-success" [disabled]="status">Submit</button>
+        </form>
+    </div>
     <div style="text-align: center; margin:auto; width: 80rem; position: relative; top:2rem;">
         <div style="text-decoration: underline;"><h2>Contact</h2></div>
         <div><a href="mailto: chajdas.lukasz@gmail.com" style="color: whitesmoke; font-size: large;">chajdas.lukasz@gmail.com</a></div>

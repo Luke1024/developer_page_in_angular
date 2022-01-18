@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ContactDto } from '../models/contact-dto';
+import { CorrectnessDto } from '../models/correctness-dto';
 
 @Component({
   selector: 'app-contact',
@@ -12,4 +14,13 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  status = false;
+
+  contact = {name:"", email:"", message:""} as ContactDto;
+
+  correctness = {name:"", email:"", message:""} as CorrectnessDto;
+
+  onSubmit() {
+  
+  }
 }

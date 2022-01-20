@@ -3,3 +3,56 @@
     color:white;
     height: 600px;
 }
+
+#container {
+    width:600px;
+    height:500px;
+    top:50px;
+    border-radius: 10px;
+    box-shadow: inset -5px -5px 5px black,
+        inset 5px 5px 5px rgba(255, 255, 255, 0.3),
+        20px 20px 20px black;
+    position: relative;
+    background-color: rgb(60,60,60);
+    margin:auto;
+}
+
+#message, #name, #email {
+    background-color: rgb(200,200,200);
+    box-shadow: inset 2px 2px 2px black,
+    inset -2px -2px 2px  white;
+    border:none;
+}
+
+#message:focus, #name:focus, #email:focus {
+    box-shadow: inset 6px 6px 6px black,
+    inset -6px -6px 6px  white;
+}
+
+#message:hover, #name:hover, #email:hover {
+    background-color: rgb(220,220,220);
+    box-shadow: inset 4px 4px 4px black,
+    inset -4px -4px 4px  white;
+}
+
+#submitbutton {
+    background-color: rgb(80,80,80);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 2px black,
+        inset -2px -2px 2px  rgba(255, 255, 255, 0.3);
+}
+
+#submitbutton:hover {
+  box-shadow: inset 5px 5px 5px black,
+  inset -5px -5px 5px  rgba(255, 255, 255, 0.3);
+}
+

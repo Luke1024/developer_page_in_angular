@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactDto } from '../models/contact-dto';
-import { CorrectnessDto } from '../models/correctness-dto';
+import { ContactCorrectnessDto } from '../models/contact-correctness-dto';
+import { MessageServiceService } from '../message-service/message-service.service';
 
 @Component({
   selector: 'app-contact',
@@ -9,7 +10,7 @@ import { CorrectnessDto } from '../models/correctness-dto';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(private messageService:MessageServiceService) { }
 
   ngOnInit(): void {
   }
@@ -18,9 +19,27 @@ export class ContactComponent implements OnInit {
 
   contact = {name:"", email:"", message:""} as ContactDto;
 
-  correctness = {name:"", email:"", message:""} as CorrectnessDto;
+  correctness = {name:"", email:"", message:""} as ContactCorrectnessDto;
+
+  
+
+  onChange() {
+    this.messageService.getContactInfo(this.contact).subscribe(response => {
+      if(response != null){
+        this.correctness = response;
+      }
+    })
+  }
 
   onSubmit() {
-  
+    if(this.status){
+      this.messageService.saveContact(this.contact).subscribe(response => {
+
+      })    
+    }
+  }
+
+  showSuccesfullMessage(){
+
   }
 }

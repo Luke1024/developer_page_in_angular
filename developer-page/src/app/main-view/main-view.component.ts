@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MessageServiceService } from '../message-service.service';
+import { MessageServiceService } from '../message-service/message-service.service';
 
 @Component({
   selector: 'app-main-view',

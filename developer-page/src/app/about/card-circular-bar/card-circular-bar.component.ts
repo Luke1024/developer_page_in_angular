@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { MessageServiceService } from 'src/app/message-service/message-service.service';
 import { BarConfig } from '../bar-config';
 import { CardConfig } from '../card-config';
 
@@ -12,9 +13,9 @@ export class CardCircularBarComponent implements OnInit {
   @Input() cardConfig:CardConfig = {} as CardConfig;
   barConfig:BarConfig = {} as BarConfig; 
   
-  constructor() { }
+  constructor(private messageService:MessageServiceService) { }
 
-  description = ""
+  description = "";
 
   @HostBinding("style.--textcolor") textColor:string="";
   @HostBinding("style.--card_color") cardColor:string="";
@@ -33,5 +34,9 @@ export class CardCircularBarComponent implements OnInit {
     this.descriptionBlurAnimeDuration = this.cardConfig.descriptionBlurAnimeDuration;
     this.cardAnimeDelay = this.cardConfig.cardAnimeDelay;
     this.cardAnimeDuration = this.cardConfig.cardAnimeDuration;
+  }
+
+  send() {
+    this.messageService.send("skill card " + this.cardConfig.description + " hover");
   }
 }

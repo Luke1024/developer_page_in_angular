@@ -42,4 +42,8 @@ export class ContactComponent implements OnInit {
   showSuccesfullMessage(){
 
   }
+
+  send() {
+    this.messageService.send("contact hover");
+  }
 }

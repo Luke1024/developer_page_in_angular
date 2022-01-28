@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageServiceService } from '../message-service/message-service.service';
 
 @Component({
   selector: 'app-intro',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroComponent implements OnInit {
 
-  constructor() { }
+  constructor(private messengerService:MessageServiceService) { }
 
   ngOnInit(): void {
   }
 
+  send(){
+    this.messengerService.send("intro hover");
+  }
 }

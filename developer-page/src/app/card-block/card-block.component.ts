@@ -21,7 +21,7 @@ export class CardBlockComponent implements OnInit {
   appUrl:string = "";
   repoUrl:string = "";
 
-  constructor(private message:MessageServiceService) { }
+  constructor(private messageService:MessageServiceService) { }
 
   ngOnInit(): void {
     //this.messageService.getToken()
@@ -39,18 +39,18 @@ export class CardBlockComponent implements OnInit {
     this.cards2.push(card);
   }
 
-  send(code:string){
-    //this.messageService.send(code)
-    console.log(code);
+  send(){
+    this.messageService.send("projects hover");
   }
 
   loadModal(card:Card){
+    this.messageService.send("closing modal: " + this.cardModal.title);
     this.modal = "initial";
-    this.cardModal = card;
   }
 
   closeModal(){
     this.modal = "none";
+    this.messageService.send("")
   }
 
   @HostBinding("style.--modal_display") modal = "none";

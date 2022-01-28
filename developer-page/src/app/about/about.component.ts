@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageServiceService } from '../message-service/message-service.service';
 import { BarConfig } from './bar-config';
 import { CardConfig } from './card-config';
 
@@ -9,7 +10,7 @@ import { CardConfig } from './card-config';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private messengerService:MessageServiceService) { }
 
   cards:CardConfig[] = []
 
@@ -156,12 +157,16 @@ export class AboutComponent implements OnInit {
       progressTextColor:"rgba(0,0,0,0.8)",
       backgroundColor:"rgb(40,40,40)",
       fadeInTimeS:2,
-      fadeInDelayS:2.2
+      fadeInDelayS:2.2,
     } as BarConfig,
   }  as CardConfig;
 
   ngOnInit(): void {
     this.cards.push(this.java, this.springBoot, this.angular,
        this.typeScript, this.css, this.html, this.sql);
+  }
+
+  send() {
+    this.messengerService.send("about hover");
   }
 }

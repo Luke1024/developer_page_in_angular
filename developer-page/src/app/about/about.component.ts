@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MessageServiceService } from '../message-service/message-service.service';
 import { BarConfig } from './bar-config';
 import { CardConfig } from './card-config';
@@ -10,7 +11,41 @@ import { CardConfig } from './card-config';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private messengerService:MessageServiceService) { }
+  private innerHeight = 0;
+  private scrollPosition = 0;
+  private animationOff:boolean = true;
+
+  constructor(private messengerService:MessageServiceService, private scroller:ViewportScroller) { }
+
+  ngOnInit(): void {
+    this.innerHeight = window.innerHeight;    
+    this.checkPosition();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerHeight = window.innerHeight;
+    console.log("height: " + this.innerHeight);    
+    this.checkPosition();
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    this.scrollPosition = this.scroller.getScrollPosition()[1];
+    console.log("scroll: " + this.scrollPosition);
+    this.checkPosition();
+  }
+
+  private checkPosition(){
+    if(this.animationOff){
+      console.log(this.innerHeight + " " + this.scrollPosition);
+      if((this.innerHeight + this.scrollPosition) > 1350){
+        this.cards.push(this.java, this.springBoot, this.angular,
+          this.typeScript, this.css, this.html, this.sql);
+          this.animationOff = false;
+      }
+    }
+  }
 
   cards:CardConfig[] = []
 
@@ -160,11 +195,6 @@ export class AboutComponent implements OnInit {
       fadeInDelayS:2.2,
     } as BarConfig,
   }  as CardConfig;
-
-  ngOnInit(): void {
-    this.cards.push(this.java, this.springBoot, this.angular,
-       this.typeScript, this.css, this.html, this.sql);
-  }
 
   send() {
     this.messengerService.send("about hover");

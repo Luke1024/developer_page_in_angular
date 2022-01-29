@@ -39,7 +39,7 @@
 }
 
 #description {
-    top:50px;
+    top:85px;
     position: relative;
 }
 
@@ -60,5 +60,5 @@
 #button {
     position: relative;
     top:50px;
-    left:80px;
+    left:115px;
 }

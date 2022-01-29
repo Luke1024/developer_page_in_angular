@@ -5,7 +5,6 @@ import { catchError } from 'rxjs/operators';
 import { PulseDto } from 'src/app/models/pulse-dto';
 import { StringDto } from 'src/app/models/string-dto';
 import { TokenStatus } from '../message-models/token-status';
-import { UrlList } from '../url-list';
 
 @Injectable({
   providedIn: 'root'

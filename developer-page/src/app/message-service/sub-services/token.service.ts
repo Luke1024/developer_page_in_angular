@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { StringDto } from 'src/app/models/string-dto';
 import { TokenStatus } from '../message-models/token-status';
-import { UrlList } from '../url-list';
 
 @Injectable({
   providedIn: 'root'

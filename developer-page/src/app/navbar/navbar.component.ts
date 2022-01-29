@@ -12,8 +12,7 @@ export class NavbarComponent implements OnInit {
   constructor(private scroller:ViewportScroller, 
     private messageService:MessageServiceService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   model = "home";
 

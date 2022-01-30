@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -24,9 +24,9 @@ export class ContactService {
       this.contactSaveUrl = contactSaveUrl;
     }
 
-    public getContactInfo(contact:ContactDto):Observable<ContactCorrectnessDto> {
+    public getContactInfo(contact:ContactDto):Observable<any> {
     if(this.isTokenActive()){
-      return this.http.put<ContactCorrectnessDto>(this.contactInfoUrl + "/" + this.tokenStatus.token, contact)
+      return this.http.put<ContactCorrectnessDto>(this.contactInfoUrl + "/" + this.tokenStatus.token, contact, {observe:'response'})
       .pipe(catchError(this.handleError<ContactCorrectnessDto>("account info")))
     } else {
       return Observable.arguments({name:"", email:"", message:""} as ContactCorrectnessDto);

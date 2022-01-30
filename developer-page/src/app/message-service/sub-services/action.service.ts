@@ -1,9 +1,9 @@
+import { ViewportScroller } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { PulseDto } from 'src/app/models/pulse-dto';
-import { StringDto } from 'src/app/models/string-dto';
 import { TokenStatus } from '../message-models/token-status';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class ActionService {
   private actionTimerValue = this.actionBatchSendEverySeconds;
 
   private pingingIntervalInSeconds = 60;
-  private pingTimerValue = this.pingingIntervalInSeconds
+  private pingTimerValue = this.pingingIntervalInSeconds;
   private operationsStorage:string[] = [];
   private tokenStatus:TokenStatus = {status:false, message:"", token:""};
   private pulseUrl:string = "";
@@ -30,8 +30,11 @@ export class ActionService {
   }
 
   public send(code:string){
+    let now = new Date();
     this.pingTimerValue = this.pingingIntervalInSeconds;
-    this.operationsStorage.push(code)
+    let action = "T:" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + ":" + now.getMilliseconds() +
+     " S:" + window.scrollY.toFixed(0) + " V:" + window.innerWidth.toFixed(0) + ":" + window.innerHeight.toFixed(0) + " C:" + code;
+    this.operationsStorage.push(action);
   }
 
   public setService(tokenStatus:TokenStatus, pulseUrl:string){
@@ -63,13 +66,17 @@ export class ActionService {
     if(this.operationsStorage.length > 0){
       if(this.isTokenActive()){
         this.postMessage(this.operationsStorage).subscribe(response => {
-          if(typeof Boolean == typeof response){
-            if(response){
-              this.operationsStorage = []
+          if(response != null){
+            if(response.body != null){
+              if(response.status==200){
+                if(response.body){
+                  this.operationsStorage = []
+                } 
+              }
             }
-          else {
+          } else {
             console.log("problem with action sending");
-          }}
+          }
       });
     }
   }
@@ -80,8 +87,8 @@ export class ActionService {
   }
 
   private postMessage(code:string[]):Observable<any>{
-    var pulse = {token:this.tokenStatus.token, codeList:code} as PulseDto
-    return this.http.post<boolean>(this.pulseUrl, pulse).pipe(catchError(this.handleError()))
+    var pulse = {token:this.tokenStatus.token, action:code} as PulseDto
+    return this.http.post<boolean>(this.pulseUrl, pulse, {observe:'response'}).pipe(catchError(this.handleError()))
   }
   
   private handleError<T>(operation = 'operation', result?: T) {

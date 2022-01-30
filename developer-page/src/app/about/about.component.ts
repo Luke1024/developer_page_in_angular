@@ -25,20 +25,17 @@ export class AboutComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.innerHeight = window.innerHeight;
-    console.log("height: " + this.innerHeight);    
     this.checkPosition();
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.scrollPosition = this.scroller.getScrollPosition()[1];
-    console.log("scroll: " + this.scrollPosition);
     this.checkPosition();
   }
 
   private checkPosition(){
     if(this.animationOff){
-      console.log(this.innerHeight + " " + this.scrollPosition);
       if((this.innerHeight + this.scrollPosition) > 1350){
         this.cards.push(this.java, this.springBoot, this.angular,
           this.typeScript, this.css, this.html, this.sql);

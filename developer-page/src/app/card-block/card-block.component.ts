@@ -9,6 +9,8 @@ import { Card } from '../models/card';
 })
 export class CardBlockComponent implements OnInit {
 
+  @HostBinding("style.--modal_display") modal = "none";
+
   cards:Card[] = []
   cards2:Card[] = []
   cardModal:Card = {} as Card;
@@ -52,8 +54,5 @@ export class CardBlockComponent implements OnInit {
     this.modal = "none";
     this.messageService.send("")
   }
-
-  @HostBinding("style.--modal_display") modal = "none";
-
 
 }

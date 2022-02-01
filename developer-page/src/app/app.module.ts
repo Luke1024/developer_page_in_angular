@@ -16,6 +16,7 @@ import { CardModalComponent } from './card-modal/card-modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { MainModalComponent } from './main-modal/main-modal.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routerOptions: ExtraOptions = {
     CardCircularBarComponent,
     CardComponent,
     CardModalComponent,
-    NavbarComponent
+    NavbarComponent,
+    MainModalComponent
   ],
   imports: [
     BrowserModule,

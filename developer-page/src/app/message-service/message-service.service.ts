@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ContactCorrectnessDto } from '../models/contact-correctness-dto';
 import { ContactDto } from '../models/contact-dto';
-import { ContactResponseDto } from '../models/contact-response-dto';
 import { TokenStatus } from './message-models/token-status';
 import { ActionService } from './sub-services/action.service';
 import { ContactService } from './sub-services/contact.service';
@@ -40,11 +38,7 @@ export class MessageServiceService {
     this.actionService.send(code);
   }
 
-  public getContactInfo(contact:ContactDto):Observable<ContactCorrectnessDto> {
-    return this.contactService.getContactInfo(contact);
-  }
-
-  public saveContact(contact:ContactDto):Observable<ContactResponseDto> {
+  public saveContact(contact:ContactDto):Observable<any> {
     return this.contactService.saveContact(contact);
   }
 

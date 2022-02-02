@@ -27,7 +27,7 @@ export class TokenService {
           observer.next(this.checkToken(token));
         })
       } else {
-          observer.next({status:false, message:"", token:token});
+          observer.next({status:false, token:token});
       }
     })    
   }
@@ -45,7 +45,7 @@ export class TokenService {
         }
       }
     }
-    return {status:false, message:"", token:""} as TokenStatus;
+    return {status:false, token:""} as TokenStatus;
   }
 
   private saveToken(token:string) {

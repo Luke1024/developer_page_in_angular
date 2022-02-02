@@ -19,7 +19,7 @@ export class ActionService {
   private pingingIntervalInSeconds = 60;
   private pingTimerValue = this.pingingIntervalInSeconds;
   private operationsStorage:string[] = [];
-  private tokenStatus:TokenStatus = {status:false, message:"", token:""};
+  private tokenStatus:TokenStatus = {status:false, token:""};
   private pulseUrl:string = "";
 
   constructor(private http:HttpClient) {}
@@ -66,35 +66,29 @@ export class ActionService {
     if(this.operationsStorage.length > 0){
       if(this.isTokenActive()){
         this.postMessage(this.operationsStorage).subscribe(response => {
-          if(response != null){
-            if(response.body != null){
-              if(response.status==200){
-                if(response.body){
-                  this.operationsStorage = []
-                } 
-              }
-            }
+          if(response){
+            this.operationsStorage = []
           } else {
             console.log("problem with action sending");
           }
-      });
+        });
+      }
     }
   }
-}
 
   private isTokenActive(){
     return this.tokenStatus.status;
   }
 
-  private postMessage(code:string[]):Observable<any>{
+  private postMessage(code:string[]):Observable<boolean>{
     var pulse = {token:this.tokenStatus.token, action:code} as PulseDto
-    return this.http.post<boolean>(this.pulseUrl, pulse, {observe:'response'}).pipe(catchError(this.handleError()))
+    return this.http.post<boolean>(this.pulseUrl, pulse).pipe(catchError(this.handleError("post action data")));
   }
   
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  private handleError(operation = 'operation') {
+    return (error: any): Observable<boolean> => {
       console.error(error + `${operation} failed: ${error.message}`); 
-      return of(result as T);
+      return Observable.arguments(false);
     };
   }
 }

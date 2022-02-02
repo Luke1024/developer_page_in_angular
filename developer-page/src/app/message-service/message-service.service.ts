@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { ContactDto } from '../models/contact-dto';
 import { TokenStatus } from './message-models/token-status';
 import { ActionService } from './sub-services/action.service';
@@ -12,7 +12,9 @@ import { TokenService } from './sub-services/token.service';
 })
 export class MessageServiceService {
 
-  private tokenStatus:TokenStatus = {status:false, message:"", token:""}
+  connectedStatus = new Subject<boolean>();
+
+  private tokenStatus:TokenStatus = {status:false, token:""}
 
   private storageKey = "local_token";
 
@@ -45,7 +47,8 @@ export class MessageServiceService {
   private ifTokenCorrectUnlockDataCollectingProcesses() {
     if(this.tokenStatus.status){
       this.actionService.setService(this.tokenStatus, this.pulseUrl);
-      this.contactService.setService(this.tokenStatus, this.contactInfoUrl, this.contactSaveUrl);
+      this.contactService.setService(this.tokenStatus, this.contactInfoUrl);
+      this.connectedStatus.next(true);
     }
   }
 }

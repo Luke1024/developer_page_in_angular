@@ -14,10 +14,11 @@
     box-shadow: inset -5px -5px 5px black,
         inset 5px 5px 5px rgba(255, 255, 255, 0.3),
         40px 40px 40px black;
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 h2 {

@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MessageServiceService } from './message-service/message-service.service';
 
 @Component({
@@ -6,10 +6,12 @@ import { MessageServiceService } from './message-service/message-service.service
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'developer-page';
 
-  constructor(private messageService:MessageServiceService) {
+  constructor(private message:MessageServiceService) {}
 
+  ngOnInit(): void {
+      this.message.startMessageService();
   }
 }

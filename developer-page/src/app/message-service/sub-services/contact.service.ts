@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { ContactDto } from 'src/app/models/contact-dto';
 import { ContactResponseDto } from 'src/app/models/contact-response-dto';
 import { TokenStatus } from '../message-models/token-status';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,19 @@ import { TokenStatus } from '../message-models/token-status';
 export class ContactService {
 
   private tokenStatus:TokenStatus = {status:false, token:""};
-  private contactSaveUrl:string = "";
 
-  constructor(private http:HttpClient) { }
+  status = new Subject<boolean>()
 
-    public setService(tokenStatus:TokenStatus, contactSaveUrl:string){
+  constructor(private http:HttpClient, private url:UrlService) { }
+
+    public setTokenStatus(tokenStatus:TokenStatus){
       this.tokenStatus = tokenStatus;
-      this.contactSaveUrl = contactSaveUrl;
     }
+
     public saveContact(contact:ContactDto):Observable<boolean> {
       if(this.isTokenActive()){
-       return this.http.put<boolean>(this.contactSaveUrl + "/" + this.tokenStatus.token,contact)
+        contact.token = this.tokenStatus.token;
+       return this.http.put<boolean>(this.url.contactSaveUrl + "/",contact)
        .pipe(catchError(this.handleError("post account")))
       } else {
         return Observable.arguments(false);

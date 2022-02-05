@@ -24,22 +24,40 @@ export class ContactComponent implements OnInit {
   @HostBinding("style.--modal_display") modal = "none";
 
   ngOnInit(): void {
-    this.messageService.connectedStatus.subscribe(next => {
-      this.connected = next;
-      this.onChange();
-    })
+    setInterval(() => {
+      this.checkConnectedStatus();
+    },1000)
+  }
+
+  private checkConnectedStatus() {
+    this.connected = this.messageService.tokenStatus.status;
+    this.onChange();    
   }
 
   onChange() {
-    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.contact.email)){
-      this.emailMessage = "";
-      if(this.connected){
+    if(this.connected){
+      if(this.isEmailOk()){
         this.isDisabled = false;
-      } else this.isDisabled = true;
+      } else {    
+        this.isDisabled = true;
+      }
     } else {
-      this.emailMessage = "You have entered an invalid email address!";
-      this.isDisabled = true; 
+      this.isDisabled = true;
     }
+  }
+
+  private isEmailOk():boolean {
+    if(this.contact.email.length > 0){
+      if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.contact.email)){
+        this.emailMessage = ""; 
+        return true;
+      } else {
+        this.emailMessage = "You have entered an invalid email address!";
+      }
+    } else {
+      this.emailMessage = "Email is required."
+    }
+    return false;
   }
 
   onSubmit() {
@@ -58,10 +76,16 @@ export class ContactComponent implements OnInit {
 
   private showSuccessResponse() {
     this.modalMessage.title = "Message succesfully send.";
+    this.showModal();
   }
 
   private showFailureResponse() {
-    this.modalMessage.title = "Message sending failure.";    
+    this.modalMessage.title = "Message sending failure.";
+    this.showModal();    
+  }
+
+  private showModal() {
+    this.modal = "initial";
   }
 
   closeModal() {

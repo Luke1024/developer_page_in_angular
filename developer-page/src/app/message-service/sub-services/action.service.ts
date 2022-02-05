@@ -1,45 +1,41 @@
 import { ViewportScroller } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { PulseDto } from 'src/app/models/pulse-dto';
 import { TokenStatus } from '../message-models/token-status';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActionService {
 
-  private disconnectActionRecordingAfterSeconds = 1800;
+  serviceStatus = new Subject<boolean>();
 
   private actionBatchSendEverySeconds = 5;
   private actionTimerValue = this.actionBatchSendEverySeconds;
 
-  private pingingIntervalInSeconds = 60;
-  private pingTimerValue = this.pingingIntervalInSeconds;
   private operationsStorage:string[] = [];
   private tokenStatus:TokenStatus = {status:false, token:""};
-  private pulseUrl:string = "";
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient, private url:UrlService) {}
 
-  public startActionRecording() {
+  start() {
     this.runBatchTimer()
-    this.runPingTimer()
   }
 
-  public send(code:string){
+  public send(code:string) {
     let now = new Date();
-    this.pingTimerValue = this.pingingIntervalInSeconds;
     let action = "T:" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + ":" + now.getMilliseconds() +
      " S:" + window.scrollY.toFixed(0) + " V:" + window.innerWidth.toFixed(0) + ":" + window.innerHeight.toFixed(0) + " C:" + code;
     this.operationsStorage.push(action);
+    console.log(this.operationsStorage.length);
   }
 
-  public setService(tokenStatus:TokenStatus, pulseUrl:string){
+  public setTokenStatus(tokenStatus:TokenStatus){
     this.tokenStatus = tokenStatus;
-    this.pulseUrl = pulseUrl;
   }
 
   private runBatchTimer(){
@@ -49,30 +45,22 @@ export class ActionService {
         this.actionTimerValue = this.actionBatchSendEverySeconds;
         this.sendMessagesInBufor();
       }
-    })    
-  }
-
-  private runPingTimer(){
-    setInterval(() => {
-    this.pingTimerValue--;
-      if(this.pingTimerValue==0){
-        this.pingTimerValue = this.pingingIntervalInSeconds;
-        this.send("ping");
-      }
-    },1000)
+    },1000)    
   }
 
   public sendMessagesInBufor(){
-    if(this.operationsStorage.length > 0){
-      if(this.isTokenActive()){
-        this.postMessage(this.operationsStorage).subscribe(response => {
-          if(response){
-            this.operationsStorage = []
-          } else {
-            console.log("problem with action sending");
-          }
-        });
-      }
+    if(this.isTokenActive()){
+      this.postMessage(this.operationsStorage).subscribe(response => {
+        console.log("post response: " + response);
+        if(response){
+          this.operationsStorage = [];
+          this.serviceStatus.next(true);
+        } else {
+          console.log("problem with action sending, trying to reload token...");
+          this.tokenStatus.status = false; // self blocking
+          this.serviceStatus.next(false);
+        }
+      });
     }
   }
 
@@ -81,13 +69,13 @@ export class ActionService {
   }
 
   private postMessage(code:string[]):Observable<boolean>{
-    var pulse = {token:this.tokenStatus.token, action:code} as PulseDto
-    return this.http.post<boolean>(this.pulseUrl, pulse).pipe(catchError(this.handleError("post action data")));
+    var pulse = {token:this.tokenStatus.token, actions:code} as PulseDto
+    return this.http.post<boolean>(this.url.pulseUrl, pulse).pipe(catchError(this.handleError("post action data")));
   }
   
   private handleError(operation = 'operation') {
     return (error: any): Observable<boolean> => {
-      console.error(error + `${operation} failed: ${error.message}`); 
+      //console.error(error + `${operation} failed: ${error.message}`); 
       return Observable.arguments(false);
     };
   }

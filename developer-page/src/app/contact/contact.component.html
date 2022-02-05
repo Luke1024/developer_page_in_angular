@@ -15,7 +15,7 @@
             <label for="message">Message</label>
             <textarea type="text" rows="4" class="form-control" id="message" [(ngModel)]="contact.message" (ngModelChange)="onChange()"></textarea>
         </div>
-        <button id="submitbutton" [disabled]="isDisabled">Submit</button>
+        <button id="submitbutton" [disabled]="isDisabled" (click)="onSubmit()">Submit</button>
         <div *ngIf="!connected" style="padding: 30px;">
             <h5>Server is currently unavailable. Try again later or send message directly to:</h5>
             <h3>chajdas.lukasz@gmail.com</h3>

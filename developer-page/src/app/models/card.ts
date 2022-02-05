@@ -5,5 +5,6 @@ export interface Card {
     img2Url:string;
     description:string;
     appUrl:string;
+    appButton:boolean;
     repoUrl:string;
 }

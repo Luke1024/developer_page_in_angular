@@ -22,9 +22,10 @@
     margin:auto;
     width: 80rem;
     position: relative;
-    top:2rem; 
-    color:white;
-    text-decoration: underline;
+    top:5rem; 
+    color:rgb(220,220,220);
+    text-shadow: 2px 2px 2px black,
+     -1px 0 rgb(102, 101, 101), 0 1px black, 1px 0 black, 0 -1px rgb(102, 102, 102);
 }
 
 #container {

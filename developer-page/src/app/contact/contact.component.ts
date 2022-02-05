@@ -80,7 +80,7 @@ export class ContactComponent implements OnInit {
   }
 
   private showFailureResponse() {
-    this.modalMessage.title = "Message sending failure.";
+    this.modalMessage.title = "Message could not be send due to an internal server error.";
     this.showModal();    
   }
 

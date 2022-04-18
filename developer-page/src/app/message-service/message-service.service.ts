@@ -16,8 +16,8 @@ export class MessageServiceService {
 
   connectedStatus = new Subject<boolean>();
 
-  reconnectingAttempts = 3;
-  reconnectingDelayS = 5; 
+  reconnectingAttempts = 30;
+  reconnectingDelayS = 10; 
 
   tokenStatus:TokenStatus = {status:false, token:""}
 
@@ -75,10 +75,11 @@ export class MessageServiceService {
   private executeReconnectingProcedure() {
     this.tokenService.pingServer().subscribe(response => {
       if(response){
-        this.tokenService.resetToken();
         this.downloadTokenOnly();
       } else {
-        this.tryToReconnect();
+        console.log("server responding but there is other problem, resetting token")
+        this.tokenService.resetToken();
+        this.downloadTokenOnly();
       }
     });
   }

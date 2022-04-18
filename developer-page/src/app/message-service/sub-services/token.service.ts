@@ -19,7 +19,7 @@ export class TokenService {
     return new Observable(observer => {
     var token = localStorage.getItem(this.url.storageKey);
     if(token == null){
-        this.http.get<StringDto>(this.url.tokenUrl, {observe:'response'})
+        this.http.get<StringDto>(this.url.tokenUrl, {observe:'response', withCredentials:true})
         .pipe(catchError(this.handleError<StringDto>("get token")))
         .subscribe(token => {
           observer.next(this.checkToken(token));
@@ -76,14 +76,8 @@ export class TokenService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); 
-      this.log(`${operation} failed: ${error.message}`);
+      console.error(error + ` ${operation} failed: ${error.message}`);
       return of(result as T);
     };
-  }
-  
-  
-  private log(message: string) {
-
   }
 }

@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -31,7 +31,6 @@ export class ActionService {
     let action = "T:" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + ":" + now.getMilliseconds() +
      " S:" + window.scrollY.toFixed(0) + " V:" + window.innerWidth.toFixed(0) + ":" + window.innerHeight.toFixed(0) + " C:" + code;
     this.operationsStorage.push(action);
-    console.log(this.operationsStorage.length);
   }
 
   public setTokenStatus(tokenStatus:TokenStatus){
@@ -51,8 +50,7 @@ export class ActionService {
   public sendMessagesInBufor(){
     if(this.isTokenActive()){
       this.postMessage(this.operationsStorage).subscribe(response => {
-        console.log("post response: " + response);
-        if(response){
+        if(this.analyzeResponse(response)){
           this.operationsStorage = [];
           this.serviceStatus.next(true);
         } else {
@@ -64,19 +62,29 @@ export class ActionService {
     }
   }
 
+  private analyzeResponse(response:any):boolean {
+    if(response != null){
+      if(response.status==200){
+        return true;
+      }
+    }
+    return false;
+  }
+
   private isTokenActive(){
     return this.tokenStatus.status;
   }
 
-  private postMessage(code:string[]):Observable<boolean>{
+
+  private postMessage(code:string[]):Observable<any>{
     var pulse = {token:this.tokenStatus.token, actions:code} as PulseDto
-    return this.http.post<boolean>(this.url.pulseUrl, pulse).pipe(catchError(this.handleError("post action data")));
+    return this.http.post<boolean>(this.url.pulseUrl, pulse, {observe:'response', withCredentials:true}).pipe(catchError(this.handleError("post action data")));
   }
   
-  private handleError(operation = 'operation') {
-    return (error: any): Observable<boolean> => {
-      //console.error(error + `${operation} failed: ${error.message}`); 
-      return Observable.arguments(false);
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error + ` ${operation} failed: ${error.message}`);
+      return of(result as T);
     };
   }
 }

@@ -1,8 +1,6 @@
 import { Component, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ContactDto } from '../models/contact-dto';
 import { MessageServiceService } from '../message-service/message-service.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { debounceTime} from 'rxjs/operators';
 import { MainModalMessage } from '../models/main-modal-message';
 
 @Component({
@@ -30,7 +28,7 @@ export class ContactComponent implements OnInit {
   }
 
   private checkConnectedStatus() {
-    this.connected = this.messageService.tokenStatus.status;
+    this.connected = this.messageService.connected;
     this.onChange();    
   }
 

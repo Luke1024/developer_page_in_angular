@@ -1,12 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Observable, of, pipe, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { ContactDto } from '../models/contact-dto';
-import { TokenStatus } from './message-models/token-status';
-import { ActionService } from './sub-services/action.service';
-import { ContactService } from './sub-services/contact.service';
-import { TokenService } from './sub-services/token.service';
+import { StringDto } from '../models/string-dto';
 import { UrlService } from './sub-services/url.service';
 
 @Injectable({
@@ -14,93 +11,65 @@ import { UrlService } from './sub-services/url.service';
 })
 export class MessageServiceService {
 
-  connectedStatus = new Subject<boolean>();
+  connected:boolean = false;
 
-  reconnectingAttempts = 30;
-  reconnectingDelayS = 10; 
-
-  tokenStatus:TokenStatus = {status:false, token:""}
-
-  constructor(private http:HttpClient,
-     private tokenService:TokenService,
-      private actionService:ActionService,
-      private contactService:ContactService) { }
+  constructor(private http:HttpClient, private url:UrlService) { }
 
   startMessageService() {
-    this.actionService.start();
-    console.log("downloading token");
-    this.tokenService.getToken().subscribe(status => this.analyzeStatus(status));
-    this.actionService.serviceStatus.subscribe(status => this.analyzeConnectionStatus(status));
-  }
-
-  downloadTokenOnly() {
-    this.tokenService.getToken().subscribe(status => this.analyzeStatus(status));
-  }
-
-  private analyzeStatus(status:TokenStatus){
-    this.tokenStatus = status;
-    if(this.tokenStatus.status){
-      this.startCommunicationProcesses();
-    } else {
-      this.tryToReconnect();
-    }
-  }
-
-  private analyzeConnectionStatus(status:boolean) {
-    if(!status){
-      this.tryToReconnect();
-    }
-  }
-
-  private startCommunicationProcesses() {
-    console.log("starting communication processes");
-    this.actionService.setTokenStatus(this.tokenStatus);
-    this.contactService.setTokenStatus(this.tokenStatus);
-    this.connectedStatus.next(true);
-  }
-
-  private tryToReconnect() {
-    console.log("trying to reconnect");
-    this.tokenStatus.status = false;
-    this.connectedStatus.next(false);
-    setTimeout(() => {
-      if(this.reconnectingAttempts > 0) {
-        this.reconnectingAttempts--;
-        this.executeReconnectingProcedure();
-      }
-      ;
-    },this.reconnectingDelayS*1000);
-  }
-
-  private executeReconnectingProcedure() {
-    this.tokenService.pingServer().subscribe(response => {
-      if(response){
-        this.downloadTokenOnly();
-      } else {
-        console.log("server responding but there is other problem, resetting token")
-        this.tokenService.resetToken();
-        this.downloadTokenOnly();
+    this.getAuth().subscribe(response => {
+      if(this.isResponseTrue(response)){
+        this.connected = true;
+        console.log("Connected");
       }
     });
   }
 
-  
-  public send(code:string) {
-    this.actionService.send(code);
+  private getAuth():Observable<any> {
+    return this.http.get(this.url.tokenUrl, {observe:'response', withCredentials:true});
   }
 
-  public saveContact(contact:ContactDto):Observable<any> {
+  private isResponseTrue(response:any){
+    if(response != null){
+      if(response.status==200){
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  public send(code:string) {
+    if(this.connected){
+      this.sendAction(this.encodeMessage(code));
+    }
+  }
+
+  private sendAction(code:string){
+    return this.http.post<boolean>(this.url.pulseUrl,{message:code} as StringDto, {observe:'response', withCredentials:true})
+    .pipe(catchError(this.handleError("post action data"))).subscribe();
+  }
+
+  private encodeMessage(code:string):string {
+    let now = new Date();
+    return " s" + window.scrollY.toFixed(0) + " w" + window.innerWidth.toFixed(0) + "h" + window.innerHeight.toFixed(0) + " c_" + code;
+  }
+
+  public saveContact(contact:ContactDto):Observable<boolean> {
     return new Observable(observer => {
-      this.contactService.saveContact(contact).subscribe(response => {
-        observer.next(response);
-        this.checkContactStatus(response);
-      });
+      if(this.connected){
+        this.http.put<boolean>(this.url.contactSaveUrl + "/",contact, {observe:'response'})
+        .pipe(catchError(this.handleError("post account"))).subscribe(response => {
+          observer.next(this.isResponseTrue(response));
+        });
+      } else {
+        return observer.next(false);
+      }
     })
   }
 
-  private checkContactStatus(status:boolean) {
-    if(!status && this.tokenStatus.status){
-  
-    }
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error + ` ${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 }

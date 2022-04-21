@@ -37,6 +37,6 @@ export class CardCircularBarComponent implements OnInit {
   }
 
   send() {
-    this.messageService.send("skill card " + this.cardConfig.description + " hover");
+    this.messageService.send("skill_card_" + this.cardConfig.description + "_hover");
   }
 }

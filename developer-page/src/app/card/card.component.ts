@@ -18,7 +18,7 @@ export class CardComponent implements OnInit {
   }
 
   loadModal(){
-    this.messageService.send("opening card: " + this.card.title);
+    this.messageService.send("opening_card_" + this.card.title);
     this.cardEmit.emit(this.card);
   }
 }

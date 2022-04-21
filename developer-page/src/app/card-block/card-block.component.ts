@@ -26,7 +26,6 @@ export class CardBlockComponent implements OnInit {
   constructor(private messageService:MessageServiceService) { }
 
   ngOnInit(): void {
-    //this.messageService.getToken()
     let cardToDo = {
       title:"TodoApp",
       tech:"Angular/Spring Boot",
@@ -50,7 +49,7 @@ export class CardBlockComponent implements OnInit {
     } as Card;
 
     let cardDeveloper = {
-      title:"This page",
+      title:"This_page",
       tech:"Angular/Spring Boot",
       imgUrl:"assets/images/page/img1.jpg",
       img2Url:"assets/images/page/img2.jpg",
@@ -61,7 +60,7 @@ export class CardBlockComponent implements OnInit {
     } as Card;
 
     let cardCircularBar = {
-      title:"Circular progress bar",
+      title:"Circular_progress_bar",
       tech:"Angular",
       imgUrl:"assets/images/bar/img1.jpg",
       img2Url:"assets/images/bar/img2.jpg",
@@ -76,18 +75,18 @@ export class CardBlockComponent implements OnInit {
   }
 
   send(){
-    this.messageService.send("projects hover");
+    this.messageService.send("projects_hover");
   }
 
   loadModal(card:Card){
     this.cardModal = card;
-    this.messageService.send("closing modal: " + this.cardModal.title);
+    this.messageService.send("opened_modal_" + this.cardModal.title);
     this.modal = "initial";
   }
 
   closeModal(){
     this.cardModal = {} as Card;
     this.modal = "none";
-    this.messageService.send("")
+    this.messageService.send("closed_modal_" + this.cardModal.title)
   }
 }

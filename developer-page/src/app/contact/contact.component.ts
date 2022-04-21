@@ -22,14 +22,12 @@ export class ContactComponent implements OnInit {
   @HostBinding("style.--modal_display") modal = "none";
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.checkConnectedStatus();
-    },1000)
+    this.messageService.connectedStatus.subscribe(next => this.refreshConnectedStatus(next));
   }
 
-  private checkConnectedStatus() {
-    this.connected = this.messageService.connected;
-    this.onChange();    
+  private refreshConnectedStatus(status:boolean) {
+    this.connected = status;
+    this.onChange();
   }
 
   onChange() {
@@ -69,7 +67,7 @@ export class ContactComponent implements OnInit {
   }
 
   send() {
-    this.messageService.send("contact hover");
+    this.messageService.send("contact_hover");
   }
 
   private showSuccessResponse() {

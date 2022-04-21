@@ -194,6 +194,6 @@ export class AboutComponent implements OnInit {
   }  as CardConfig;
 
   send() {
-    this.messengerService.send("about hover");
+    this.messengerService.send("about_hover");
   }
 }

@@ -14,6 +14,6 @@ export class IntroComponent implements OnInit {
   }
 
   send(){
-    this.messengerService.send("intro hover");
+    this.messengerService.send("intro_hover");
   }
 }

@@ -13,7 +13,8 @@ export class MessageServiceService {
   connectedStatus = new Subject<boolean>();
   connected:boolean = false;
 
-  private rootUrl = "http://localhost:8081/input";
+  private rootUrl = "https://xcyfqoiwe.xyz/input";
+  //private rootUrl = "http://localhost:8081/input";
   private tokenUrl = this.rootUrl + "/auth";
   private pulseUrl = this.rootUrl + "/load";
   private contactSaveUrl = this.rootUrl + "/contact";
@@ -28,7 +29,6 @@ export class MessageServiceService {
       if(this.isResponseTrue(response)){
         this.connected = true;
         this.connectedStatus.next(true);
-        console.log("Connected");
         this.runPingTimer();
       }
     });
@@ -45,7 +45,7 @@ export class MessageServiceService {
     return new Observable(observer => {
       if(this.connected){
         this.resetPingTimer();
-        this.http.put<boolean>(this.contactSaveUrl + "/",contact, {observe:'response'})
+        this.http.post<boolean>(this.contactSaveUrl + "/",contact, {observe:'response'})
         .pipe(catchError(this.handleError("post account"))).subscribe(response => {
           observer.next(this.isResponseTrue(response));
         });
@@ -63,7 +63,6 @@ export class MessageServiceService {
     setInterval(()=>{
       if(this.pingTimer==this.pingInterval) this.send("ping");
       this.pingTimer++;
-      console.log(this.pingTimer);
     },1000);
   }
 

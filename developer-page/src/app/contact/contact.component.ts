@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ContactDto } from '../models/contact-dto';
-import { MessageServiceService } from '../message-service/message-service.service';
+import { BackendConnectorService } from '../message-service/backend-connector-service';
 import { MainModalMessage } from '../models/main-modal-message';
 
 @Component({
@@ -10,7 +10,7 @@ import { MainModalMessage } from '../models/main-modal-message';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private messageService:MessageServiceService) { }
+  constructor(private messageService:BackendConnectorService) { }
 
   isDisabled = false;
   connected = false;

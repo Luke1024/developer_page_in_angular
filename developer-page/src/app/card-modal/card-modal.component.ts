@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MessageServiceService } from '../message-service/message-service.service';
+import { BackendConnectorService } from '../message-service/backend-connector-service';
 import { Card } from '../models/card';
 
 @Component({
@@ -9,7 +9,7 @@ import { Card } from '../models/card';
 })
 export class CardModalComponent implements OnInit {
 
-  constructor(private messageService:MessageServiceService) { }
+  constructor(private messageService:BackendConnectorService) { }
 
   @Input() card = {} as Card;
   @Output() close = new EventEmitter();

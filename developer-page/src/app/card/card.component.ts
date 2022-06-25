@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MessageServiceService } from '../message-service/message-service.service';
-import { Card } from '../models/card';
+import { BackendConnectorService } from '../message-service/backend-connector-service';
+import { ProjectMiniatureDto } from '../models/project-miniature-dto';
+
 
 @Component({
   selector: 'app-card',
@@ -9,16 +10,14 @@ import { Card } from '../models/card';
 })
 export class CardComponent implements OnInit {
 
-  @Input() card:Card = {} as Card;
-  @Output() cardEmit = new EventEmitter<Card>();
+  @Input() miniature:ProjectMiniatureDto = {} as ProjectMiniatureDto;
 
-  constructor(private messageService:MessageServiceService) { }
+  constructor(private messageService:BackendConnectorService) { }
 
   ngOnInit(): void {
   }
 
   loadModal(){
-    this.messageService.send("opening_card_" + this.card.title);
-    this.cardEmit.emit(this.card);
+    this.messageService.send("opening_description_" + this.miniature.title);
   }
 }

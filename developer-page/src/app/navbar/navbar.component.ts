@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
-import { MessageServiceService } from '../message-service/message-service.service';
+import { BackendConnectorService } from '../message-service/backend-connector-service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +10,7 @@ import { MessageServiceService } from '../message-service/message-service.servic
 export class NavbarComponent implements OnInit {
 
   constructor(private scroller:ViewportScroller, 
-    private messageService:MessageServiceService) { }
+    private messageService:BackendConnectorService) { }
 
   ngOnInit(): void {}
 

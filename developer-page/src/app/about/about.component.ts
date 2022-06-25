@@ -1,6 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MessageServiceService } from '../message-service/message-service.service';
+import { BackendConnectorService } from '../message-service/backend-connector-service';
 import { BarConfig } from './bar-config';
 import { CardConfig } from './card-config';
 
@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
   private scrollPosition = 0;
   private animationOff:boolean = true;
 
-  constructor(private messengerService:MessageServiceService, private scroller:ViewportScroller) { }
+  constructor(private messengerService:BackendConnectorService, private scroller:ViewportScroller) { }
 
   ngOnInit(): void {
     this.innerHeight = window.innerHeight;    

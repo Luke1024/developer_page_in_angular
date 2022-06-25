@@ -3,26 +3,25 @@ import { Injectable} from '@angular/core';
 import { Observable, of, Subject} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ContactDto } from '../models/contact-dto';
+import { ProjectMiniatureDto } from '../models/project-miniature-dto';
 import { StringDto } from '../models/string-dto';
+import { UrlService } from '../url.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MessageServiceService {
+export class BackendConnectorService {
 
   connectedStatus = new Subject<boolean>();
   connected:boolean = false;
 
-  private rootUrl = "https://xcyfqoiwe.xyz/input";
-  //private rootUrl = "http://localhost:8081/input";
-  private tokenUrl = this.rootUrl + "/auth";
-  private pulseUrl = this.rootUrl + "/load";
-  private contactSaveUrl = this.rootUrl + "/contact";
-
   private pingTimer = 0;
   private pingInterval = 55;
 
-  constructor(private http:HttpClient) { }
+  //projects storage
+
+  constructor(private http:HttpClient,
+    private url:UrlService) { }
 
   startMessageService() {
     this.getAuth().subscribe(response => {
@@ -45,7 +44,7 @@ export class MessageServiceService {
     return new Observable(observer => {
       if(this.connected){
         this.resetPingTimer();
-        this.http.post<boolean>(this.contactSaveUrl + "/",contact, {observe:'response'})
+        this.http.post<boolean>(this.url.getContactSaveUrl() + "/",contact, {observe:'response'})
         .pipe(catchError(this.handleError("post account"))).subscribe(response => {
           observer.next(this.isResponseTrue(response));
         });
@@ -67,7 +66,7 @@ export class MessageServiceService {
   }
 
   private getAuth():Observable<any> {
-    return this.http.get(this.tokenUrl, {observe:'response', withCredentials:true}).pipe(catchError(this.handleError("auth")));
+    return this.http.get(this.url.getTokenUrl(), {observe:'response', withCredentials:true}).pipe(catchError(this.handleError("auth")));
   }
 
   private isResponseTrue(response:any){
@@ -80,13 +79,28 @@ export class MessageServiceService {
   }
 
   private sendAction(code:string){
-    return this.http.post<boolean>(this.pulseUrl,{message:code} as StringDto, {observe:'response', withCredentials:true})
+    return this.http.post<boolean>(this.url.getPulseUrl(),{message:code} as StringDto, {observe:'response', withCredentials:true})
     .pipe(catchError(this.handleError("post action data"))).subscribe();
   }
 
   private encodeMessage(code:string):string {
     let now = new Date();
     return "s_" + window.scrollY.toFixed(0) + "_w_" + window.innerWidth.toFixed(0) + "_h_" + window.innerHeight.toFixed(0) + "_c_" + code;
+  }
+
+  public getNormalProjects():Observable<ProjectMiniatureDto[]>{
+    return this.http.get<ProjectMiniatureDto[]>(this.url.getProjectsNormalUrl(), {withCredentials:true})
+    .pipe(catchError(this.handleError<ProjectMiniatureDto[]>("get projects normal")));
+  }
+
+  public getMiniProjects():Observable<ProjectMiniatureDto[]>{
+    return this.http.get<ProjectMiniatureDto[]>(this.url.getProjectsMiniUrl(), {withCredentials:true})
+    .pipe(catchError(this.handleError<ProjectMiniatureDto[]>("get projects mini")));
+  }
+
+  public getDescription(descriptionId:number):Observable<String>{
+    return this.http.get<String>(this.url.getProjectDescriptionUrl() + descriptionId)
+    .pipe(catchError(this.handleError<String>("get description " + descriptionId)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

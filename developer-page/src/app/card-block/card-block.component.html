@@ -1,21 +1,24 @@
 <div id="background" (mouseenter)="send()">
 <div id="block">
-    <h2 id="projects">Projects:</h2>
+    <div style="height: 100px; position:relative;">
+        <h2 id="projects">Projects:</h2>
+    </div>
     <div class="container" id="container">
         <div class="row">
-            <div *ngFor="let card of cards">
-                <app-card [card]="card" (cardEmit)="loadModal($event)"></app-card>
+            <div *ngFor="let miniature of miniatures">
+                <app-card [miniature]="miniature"></app-card>
             </div>
         </div>
     </div>
-    <h2 id="mprojects">Mini projects:</h2>
+    <div style="height: 100px; position: relative; margin-top: 100px;">
+        <h2 id="mprojects">Mini projects:</h2>
+    </div>
     <div class="container" id="container2">
         <div class="row">
-            <div *ngFor="let card of cards2">
-                <app-card [card]="card" (cardEmit)="loadModal($event)"></app-card>
+            <div *ngFor="let miniature of miniaturesMini">
+                <app-card [miniature]="miniature"></app-card>
             </div>
         </div>
     </div>
-    <app-card-modal id="modal" [card]="cardModal" (close)="closeModal()"></app-card-modal>
 </div>
 </div>

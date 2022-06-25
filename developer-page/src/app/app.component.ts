@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MessageServiceService } from './message-service/message-service.service';
+import { BackendConnectorService } from './message-service/backend-connector-service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { MessageServiceService } from './message-service/message-service.service
 export class AppComponent implements OnInit {
   title = 'developer-page';
 
-  constructor(private message:MessageServiceService) {}
+  constructor(private message:BackendConnectorService) {}
 
   ngOnInit(): void {
       this.message.startMessageService();

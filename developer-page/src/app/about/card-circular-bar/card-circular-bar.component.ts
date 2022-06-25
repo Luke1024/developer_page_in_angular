@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { MessageServiceService } from 'src/app/message-service/message-service.service';
+import { BackendConnectorService } from 'src/app/message-service/backend-connector-service';
 import { BarConfig } from '../bar-config';
 import { CardConfig } from '../card-config';
 
@@ -13,7 +13,7 @@ export class CardCircularBarComponent implements OnInit {
   @Input() cardConfig:CardConfig = {} as CardConfig;
   barConfig:BarConfig = {} as BarConfig; 
   
-  constructor(private messageService:MessageServiceService) { }
+  constructor(private messageService:BackendConnectorService) { }
 
   description = "";
 

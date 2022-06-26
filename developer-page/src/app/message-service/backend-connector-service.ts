@@ -98,9 +98,9 @@ export class BackendConnectorService {
     .pipe(catchError(this.handleError<ProjectMiniatureDto[]>("get projects mini")));
   }
 
-  public getDescription(descriptionId:number):Observable<String>{
-    return this.http.get<String>(this.url.getProjectDescriptionUrl() + descriptionId)
-    .pipe(catchError(this.handleError<String>("get description " + descriptionId)));
+  public getDescription(descriptionId:number):Observable<StringDto>{
+    return this.http.get<StringDto>(this.url.getProjectDescriptionUrl() + descriptionId)
+    .pipe(catchError(this.handleError<StringDto>("get description " + descriptionId)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

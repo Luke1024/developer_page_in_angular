@@ -15,19 +15,10 @@ import { CardComponent } from './card/card.component';
 import { CardModalComponent } from './card-modal/card-modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MainModalComponent } from './main-modal/main-modal.component';
-
-const routes: Routes = [
-  {
-    path: "",
-    component: MainViewComponent
-  }
-];
-const routerOptions: ExtraOptions = {
-  anchorScrolling: "enabled"
-  //scrollPositionRestoration: "enabled"
-};
+import { DescriptionComponent, SafeHtmlPipe } from './description/description.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -42,21 +33,25 @@ const routerOptions: ExtraOptions = {
     CardComponent,
     CardModalComponent,
     NavbarComponent,
-    MainModalComponent
+    MainModalComponent,
+    DescriptionComponent,
+    NotfoundComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgbModule,
     FormsModule,
-    RouterModule,
-    RouterModule.forRoot(routes, routerOptions)
+    RouterModule.forRoot([
+      {path: "home", component:MainViewComponent},
+      {path: "description/:id", component:DescriptionComponent},
+      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      {path: '**', component:NotfoundComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-
-
-
 
 export class AppModule { }

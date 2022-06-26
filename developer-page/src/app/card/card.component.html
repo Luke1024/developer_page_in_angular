@@ -3,7 +3,7 @@
         <div id="description">
             <p id="title">{{miniature.title}}</p>
             <p id="tech">{{miniature.technologies}}</p>
-            <a id="button" class="btn btn-outline-danger myButton" (click)="loadModal()">Learn more</a>
+            <a id="button" class="btn btn-outline-danger myButton" [routerLink]="['/description',miniature.id]">Learn more</a>
         </div>
     </div>
     <img src="{{miniature.miniatureUrl}}" id="img" class="screen">

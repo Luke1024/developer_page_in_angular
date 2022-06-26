@@ -22,7 +22,11 @@ export class ContactComponent implements OnInit {
   @HostBinding("style.--modal_display") modal = "none";
 
   ngOnInit(): void {
-    this.messageService.connectedStatus.subscribe(next => this.refreshConnectedStatus(next));
+    if(this.messageService.connected){
+      this.refreshConnectedStatus(true);
+    } else {
+      this.messageService.connectedStatus.subscribe(next => this.refreshConnectedStatus(next));
+    }
   }
 
   private refreshConnectedStatus(status:boolean) {

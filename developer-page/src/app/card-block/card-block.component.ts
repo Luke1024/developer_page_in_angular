@@ -15,18 +15,26 @@ export class CardBlockComponent implements OnInit {
   miniaturesMini:ProjectMiniatureDto[] = []
   
 
-  constructor(private messageService:BackendConnectorService) { }
+  constructor(private backendConnector:BackendConnectorService) { }
 
   ngOnInit(): void {
-    this.messageService.connectedStatus.subscribe(next => {
-      if(next){
-        this.messageService.getNormalProjects().subscribe(response => this.miniatures = response);
-        this.messageService.getMiniProjects().subscribe(response => this.miniaturesMini = response);
-      }
-    })
+    if(this.backendConnector.connected){
+      this.getProjects();
+    } else {
+      this.backendConnector.connectedStatus.subscribe(next => {
+        if(next){
+          this.getProjects();
+        }
+      })
+    }
+  }
+
+  private getProjects(){
+    this.backendConnector.getNormalProjects().subscribe(response => this.miniatures = response);
+    this.backendConnector.getMiniProjects().subscribe(response => this.miniaturesMini = response);
   }
 
   send(){
-    this.messageService.send("projects_hover");
+    this.backendConnector.send("projects_hover");
   }
 }

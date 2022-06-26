@@ -1,24 +1,24 @@
 <div id="background" (mouseenter)="send()">
-<div id="block">
-    <div style="height: 100px; position:relative;">
-        <h2 id="projects">Projects:</h2>
-    </div>
-    <div class="container" id="container">
-        <div class="row">
-            <div *ngFor="let miniature of miniatures">
-                <app-card [miniature]="miniature"></app-card>
+    <div id="block">
+        <div style="height: 100px; position:relative;">
+            <h2 id="projects">Projects:</h2>
+        </div>
+        <div class="container" id="container">
+            <div class="row">
+                <div *ngFor="let miniature of miniatures">
+                    <app-card [miniature]="miniature"></app-card>
+                </div>
+            </div>
+        </div>
+        <div style="height: 100px; position: relative; margin-top: 100px;">
+            <h2 id="mprojects">Mini projects:</h2>
+        </div>
+        <div class="container" id="container2">
+            <div class="row">
+                <div *ngFor="let miniature of miniaturesMini">
+                    <app-card [miniature]="miniature"></app-card>
+                </div>
             </div>
         </div>
     </div>
-    <div style="height: 100px; position: relative; margin-top: 100px;">
-        <h2 id="mprojects">Mini projects:</h2>
-    </div>
-    <div class="container" id="container2">
-        <div class="row">
-            <div *ngFor="let miniature of miniaturesMini">
-                <app-card [miniature]="miniature"></app-card>
-            </div>
-        </div>
-    </div>
-</div>
 </div>

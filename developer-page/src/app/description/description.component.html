@@ -1,6 +1,13 @@
 <div id="b1">
     <div id="b2">
         <a id="button" routerLink="/home" style="position:fixed; top:0px;">Home</a>
-        <div [innerHtml]="description | safeHtml"></div>
+        <h2 style="color:white; text-align: center;">{{description.title}}</h2>
+        <div style="color:white;">{{description.description}}</div>
+        <div *ngFor="let image of description.images">
+            <app-image style="padding: 100px;" [image]="image"></app-image>
+        </div>
+        <div>
+            <a *ngFor="let button of description.buttons" id="button" [href]="button.buttonUrl" target="_blank">{{button.buttonDescription}}</a>
+        </div>
     </div>
 </div>

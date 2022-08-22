@@ -17,8 +17,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { MainModalComponent } from './main-modal/main-modal.component';
-import { DescriptionComponent, SafeHtmlPipe } from './description/description.component';
+import { DescriptionComponent } from './description/description.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { ImageComponent } from './image/image.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     MainModalComponent,
     DescriptionComponent,
     NotfoundComponent,
-    SafeHtmlPipe
+    ImageComponent
   ],
   imports: [
     BrowserModule,

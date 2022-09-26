@@ -1,9 +1,9 @@
 import { ButtonDto } from "./button-dto";
-import { DescriptionImageDto } from "./description-image-dto";
+import { DescriptionPartDto } from "./description-part-dto";
 
 export interface DescriptionDto {
     title:string;
-    description:string;
-    images:DescriptionImageDto[];
-    buttons:ButtonDto[];
+    intro:string;
+    descriptionPartDtos:DescriptionPartDto[];
+    buttonDtos:ButtonDto[];
 }

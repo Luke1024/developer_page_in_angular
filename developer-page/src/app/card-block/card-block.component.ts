@@ -15,13 +15,14 @@ export class CardBlockComponent implements OnInit {
   miniatures:ProjectMiniatureDto[] = []
   miniaturesMini:ProjectMiniatureDto[] = []
 
-  constructor(private backendConnector:BackendConnectorService,
-    private offlineData:OfflineDataService) { }
+  constructor(private backendConnector:BackendConnectorService, private offlineData:OfflineDataService) { }
 
   ngOnInit(): void {
-    this.miniatures = this.offlineData.getNormalProjects();
 
-    /*
+
+
+    //this.miniatures = this.offlineData.getNormalProjects();
+
     if(this.backendConnector.connected){
       this.getProjects();
     } else {
@@ -30,7 +31,7 @@ export class CardBlockComponent implements OnInit {
           this.getProjects();
         }
       })
-    }*/
+    }
   }
 
   private getProjects(){

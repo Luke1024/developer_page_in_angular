@@ -1,8 +1,9 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import { Observable, of, Subject} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ContactDto } from '../models/contact-dto';
+import { DescriptionDto } from '../models/description-dto';
 import { ProjectMiniatureDto } from '../models/project-miniature-dto';
 import { StringDto } from '../models/string-dto';
 import { UrlService } from '../url.service';
@@ -98,9 +99,8 @@ export class BackendConnectorService {
     .pipe(catchError(this.handleError<ProjectMiniatureDto[]>("get projects mini")));
   }
 
-  public getDescription(descriptionId:number):Observable<StringDto>{
-    return this.http.get<StringDto>(this.url.getProjectDescriptionUrl() + descriptionId)
-    .pipe(catchError(this.handleError<StringDto>("get description " + descriptionId)));
+  public getDescription(descriptionId:number):Observable<HttpResponse<DescriptionDto>>{
+    return this.http.get<DescriptionDto>(this.url.getProjectDescriptionUrl() + descriptionId, {observe:'response'});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

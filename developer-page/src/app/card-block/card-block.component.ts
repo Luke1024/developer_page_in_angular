@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { BackendConnectorService } from '../message-service/backend-connector-service';
 import { ProjectMiniatureDto } from '../models/project-miniature-dto';
+import { OfflineDataService } from '../offline-data.service';
 
 @Component({
   selector: 'app-card-block',
@@ -13,11 +14,15 @@ export class CardBlockComponent implements OnInit {
 
   miniatures:ProjectMiniatureDto[] = []
   miniaturesMini:ProjectMiniatureDto[] = []
-  
 
-  constructor(private backendConnector:BackendConnectorService) { }
+  constructor(private backendConnector:BackendConnectorService, private offlineData:OfflineDataService) { }
 
   ngOnInit(): void {
+
+
+
+    //this.miniatures = this.offlineData.getNormalProjects();
+
     if(this.backendConnector.connected){
       this.getProjects();
     } else {

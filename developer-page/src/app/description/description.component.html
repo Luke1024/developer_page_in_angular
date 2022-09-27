@@ -1,6 +1,18 @@
 <div id="b1">
     <div id="b2">
         <a id="button" routerLink="/home" style="position:fixed; top:0px;">Home</a>
-        <div [innerHtml]="description | safeHtml"></div>
+        <h1 style="color:white; text-align: center;">{{description.title}}</h1>
+        <h4 style="color: white; padding-top: 25px; text-indent: 50px;">{{description.intro}}</h4>
+        <div *ngFor="let part of description.descriptionPartDtos">
+            <p *ngIf="!part.imageTop" style="color:white; text-indent: 30px;">{{part.description}}</p> 
+            <div *ngIf="part.containImage" style="border:3px solid gray; border-radius: 10px; margin:auto; padding:5px; max-width: min-content; margin-top: 50px; margin-bottom: 50px;">
+                <img [src]="part.image.imageUrl" [width]="part.image.width" [height]="part.image.height">
+                <p *ngIf="part.image.description" style="color: white; padding:25px 15px 10px; font-size: medium;">{{part.image.description}}</p>
+            </div>
+            <p *ngIf="part.imageTop" style="color:white; font-size: large; text-indent: 30px;">{{part.description}}</p>
+        </div>    
+        <div style="margin:100px;">
+            <a *ngFor="let button of description.buttonDtos" id="button" [href]="button.buttonUrl" target="_blank" style="margin:30px">{{button.buttonDescription}}</a>
+        </div>
     </div>
 </div>

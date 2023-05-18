@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class UrlService {
 
-   //private rootUrl = "https://xcyfqoiwe.xyz/input";
-   private rootUrl = "http://localhost:8082";
+   //private rootUrl = "https://xyzndasdag.online";
+   private rootUrl = "http://localhost:3000";
    private tokenUrl = this.rootUrl + "/input/auth";
    private pulseUrl = this.rootUrl + "/input/load";
    private contactSaveUrl = this.rootUrl + "/input/contact";

@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendConnectorService } from '../message-service/backend-connector-service';
 import { DescriptionDto } from '../models/description-dto';
-import { OfflineDataService } from '../offline-data.service';
 import { UrlService } from '../url.service';
+import { OfflineDataService } from '../offline-service/offline-data.service';
 
 @Component({
   selector: 'app-description',
@@ -24,9 +24,9 @@ export class DescriptionComponent implements OnInit {
   ngOnInit(): void {
     let id = parseInt(this.route.snapshot.paramMap.get('id')!);
 
-    //this.description = this.offlineData.getDescriptions(1);
-
+    this.description = this.offlineData.getDescriptions(id);
     
+  /*
     this.connector.getDescription(id).subscribe(response => {
     if(response.ok){
       if(response.body != null){
@@ -38,5 +38,6 @@ export class DescriptionComponent implements OnInit {
       }
     }
   })
+  */
 }
 }

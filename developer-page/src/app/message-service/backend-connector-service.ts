@@ -36,8 +36,10 @@ export class BackendConnectorService {
 
   public send(code:string) {
     if(this.connected){
+      /*
       this.resetPingTimer();
       this.sendAction(this.encodeMessage(code));
+      */
     }
   }
 
@@ -45,14 +47,23 @@ export class BackendConnectorService {
     return new Observable(observer => {
       if(this.connected){
         this.resetPingTimer();
-        this.http.post<boolean>(this.url.getContactSaveUrl() + "/",contact, {observe:'response'})
+        this.http.post<boolean>(this.url.getContactSaveUrl() + "/",contact, {observe:'response', withCredentials:true})
         .pipe(catchError(this.handleError("post account"))).subscribe(response => {
-          observer.next(this.isResponseTrue(response));
+          observer.next(this.isPostResponseOk(response));
         });
       } else {
         return observer.next(false);
       }
     })
+  }
+
+  private isPostResponseOk(response:any) {
+    if(response != null){
+      if(response.status==201){
+        return true;
+      }
+    }
+    return false;
   }
 
   private resetPingTimer(){

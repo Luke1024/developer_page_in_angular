@@ -33,4 +33,11 @@ export class Miniatures {
         technologies:"Angular",
         miniatureUrl:"assets/images/progress/circular_bar_2.jpg"
     } as ProjectMiniatureDto;
+
+    messenger:ProjectMiniatureDto = {
+        id:5,
+        title:"Messenger",
+        technologies:"Angular/Spring Boot",
+        miniatureUrl:"assets/images/messenger/messenger_2.jpg"
+    } as ProjectMiniatureDto;
 }

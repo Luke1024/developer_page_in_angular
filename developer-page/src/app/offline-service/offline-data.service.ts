@@ -10,6 +10,7 @@ import { Descriptions } from '../data/descriptions';
 export class OfflineDataService {
 
   private normalProjects:ProjectMiniatureDto[] = [
+    this.miniatures.messenger,
     this.miniatures.thispage,
     this.miniatures.trading,
     this.miniatures.todo
@@ -18,8 +19,6 @@ export class OfflineDataService {
   private miniProjects:ProjectMiniatureDto[] = [
     this.miniatures.progress
   ]
-  private project1: DescriptionDto = {} as DescriptionDto;
-  private project2: DescriptionDto = {} as DescriptionDto;
 
   constructor(private miniatures:Miniatures, private descriptions:Descriptions) { }
 
@@ -39,7 +38,10 @@ export class OfflineDataService {
   }
 
   private descriptionList:Map<number, DescriptionDto> = new Map([
-    [1,this.descriptions.todoProjectDescription],
-    [2,this.project2]
+    [1, this.descriptions.todoProjectDescription],
+    [2, this.descriptions.tradingProjectDescription],
+    [3, this.descriptions.thisPage],
+    [4, this.descriptions.progress],
+    [5, this.descriptions.messenger]
   ])
 }

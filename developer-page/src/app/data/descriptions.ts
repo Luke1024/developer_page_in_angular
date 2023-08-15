@@ -8,7 +8,6 @@ import { DescriptionPartDto } from "../models/description-part-dto";
 })
 export class Descriptions {
 
-
     private todoPart1: DescriptionPartDto = {
         description: "This is my first application in which I connected Spring Boot and Angular together.\n" +
             "When I started this app I knew nothing about front-end development. \n" +
@@ -83,7 +82,7 @@ export class Descriptions {
         image: {
             width: 800,
             height: 600,
-            imageUrl: "/images/image/8",
+            imageUrl: "assets/images/trading/trading_1.jpg",
             description: "Current market data is downloaded in real-time and plotted on the chart."  
         }
     };  
@@ -95,7 +94,7 @@ export class Descriptions {
         image: {
             width: 800,
             height: 600,
-            imageUrl: "/images/image/9",  
+            imageUrl: "assets/images/trading/trading_2.jpg",  
             description: "It's possible to open multiple accounts and multiple orders within a single account."
         }
     };  
@@ -131,19 +130,19 @@ export class Descriptions {
     image: {
         width: 800,
         height: 800,
-        imageUrl: "/images/image/3",
+        imageUrl: "assets/images/page/this_page_1.jpg",
         description: ""
     }
 };
 
     private thisPart2: DescriptionPartDto = {
-        description: "WARNING! Api wchich is exposing endpoint with ",
+        description: "",
         containImage: true,
         imageTop: true,
         image: {
             width: 800,
             height: 800,
-            imageUrl: "/images/image/4",
+            imageUrl: "assets/images/page/this_page_2.jpg",
             description: ""
         }
     };
@@ -176,7 +175,7 @@ export class Descriptions {
         image: {
             width:800,
             height:800,
-            imageUrl:"",
+            imageUrl:"assets/images/progress/circular_bar_1.jpg",
             description:""
         }
     }
@@ -188,7 +187,7 @@ export class Descriptions {
         image: {
             width:800,
             height:800,
-            imageUrl:"",
+            imageUrl:"assets/images/progress/circular_bar_2.jpg",
             description:""
         }
     }
@@ -201,6 +200,54 @@ export class Descriptions {
             {
                 buttonDescription: "Open github repository",
                 buttonUrl:"https://github.com/Luke1024/Circular_progress_bar_in_angular",
+            }
+        ]
+    }
+
+    private messengerPart1:DescriptionPartDto = {
+        description:"This is project that I developed to understand how messenger application could be build. The project utilizes Spring Boot for the server-side operations and Angular for the client-side user interface. At the current stage of this project sockets are not used, it's build more like a typical webapp using REST api. Client side is making requests to update, server push is not used in any form.",
+        containImage:true,
+        imageTop:false,
+        image: {
+            width:800,
+            height:600,
+            imageUrl:"assets/images/messenger/messenger_1.jpg",
+            description:""
+        }
+    }
+
+    private messengerPart2:DescriptionPartDto = {
+        description:"",
+        containImage:true,
+        imageTop:true,
+        image: {
+            width:800,
+            height:600,
+            imageUrl:"assets/images/messenger/messenger_2.jpg",
+            description:""
+        }
+    }
+
+    private messengerPart3:DescriptionPartDto = {
+        description:"",
+        containImage:true,
+        imageTop:true,
+        image: {
+            width:800,
+            height:600,
+            imageUrl:"assets/images/messenger/messenger_3.jpg",
+            description:""
+        }
+    }
+
+    messenger:DescriptionDto = {
+        title:"Messenger",
+        intro:"",
+        descriptionPartDtos:[this.messengerPart1, this.messengerPart2, this.messengerPart3],
+        buttonDtos: [
+            {
+                buttonDescription: "Open github repository",
+                buttonUrl: "https://github.com/Luke1024/messenger"
             }
         ]
     }
